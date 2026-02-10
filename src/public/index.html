@@ -7,6 +7,16 @@
 </head>
 <body>
     <div id="root"></div>
-    <script type="module" src="/dist/main.js"></script>
+    <script type="importmap">
+        {
+        "imports": {
+            "@pages/": "/dist/pages/",
+            "@types/": "/dist/types/",
+            "@api/": "/dist/api/"
+        }
+        }
+    </script>
+
+    <script type="module" src="/dist/main/main.js"></script>
 </body>
 </html>
