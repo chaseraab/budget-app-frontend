@@ -19,7 +19,6 @@ function createAccountTable(accounts: Account[]): HTMLTableElement {
         row.appendChild(Object.assign(document.createElement("td"), { textContent: account.name }));
         row.appendChild(Object.assign(document.createElement("td"), { textContent: account.type }));
         row.appendChild(Object.assign(document.createElement("td"), { textContent: account.isActive ? "Yes" : "No" }));
-        console.log(account)
 
         table.appendChild(row);
     }
@@ -30,15 +29,26 @@ function createAccountTable(accounts: Account[]): HTMLTableElement {
 export async function renderAccountsPage(app: HTMLElement) {
   app.innerHTML = "";
 
+  const pageContainer = document.createElement("div");
+  pageContainer.className = "page-container";
+  app.appendChild(pageContainer);
+
   const heading = document.createElement("h1");
   heading.textContent = "Accounts";
+  pageContainer.appendChild(heading);
+
+  const tableContainer = document.createElement("div");
+  tableContainer.className = "table-container";
+  pageContainer.appendChild(tableContainer);
+
+
+  var table = document.createElement("table");
 
   try {
     const response = await fetch(API_URL);
     const accounts: Account[] = await response.json();
 
-    const table = createAccountTable(accounts);
-    app.appendChild(table);
+    table = createAccountTable(accounts);
 
 
   } catch {
@@ -47,6 +57,7 @@ export async function renderAccountsPage(app: HTMLElement) {
     app.appendChild(error);
     return;
   }
+  
+    tableContainer.appendChild(table);
 
-  app.appendChild(heading);
 }

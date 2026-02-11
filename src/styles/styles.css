@@ -1,0 +1,22 @@
+/* h1 {
+    display: flex;
+} */
+
+table, th, td {
+    border: 1px solid black;
+    /*display: flex;*/
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.table-container {
+    display: flex;
+    flex-grow: 1;
+}
+
+table {
+    width: 100%;
+}
