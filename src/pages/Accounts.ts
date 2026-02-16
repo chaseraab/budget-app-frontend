@@ -1,6 +1,8 @@
 import type { Account } from "../types/Account";
 import { createEntityTable } from "../Supplemental/EntityTable/EntityTable.js";
 
+const GET_URL = "http://localhost:8080/api/accounts/all";
+
 export async function renderAccountsPage(app: HTMLElement) {
   app.innerHTML = "";
 
