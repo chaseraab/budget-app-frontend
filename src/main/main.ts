@@ -1,4 +1,6 @@
 import { renderAccountsPage } from "@pages/Accounts.js";
+import { renderIncomePage } from "@pages/Income.js";
+import { renderAllocationsPage } from "@pages/Allocation.js";
 const root = document.getElementById("root")!;
 
 function renderHomePage() {
@@ -10,7 +12,21 @@ function renderHomePage() {
         renderAccountsPage(root);
     });
 
+    const incomeButton = document.createElement("button");
+    incomeButton.textContent = "Income";
+    incomeButton.addEventListener("click", () => {
+        renderIncomePage(root)
+    });
+
+    const allocationButton = document.createElement("button");
+    allocationButton.textContent = "Allocations";
+    allocationButton.addEventListener("click", () => {
+        renderAllocationsPage(root);
+    });
+
     root?.appendChild(accountButton);
+    root?.appendChild(incomeButton);
+    root?.appendChild(allocationButton);
 }
 
 renderHomePage();
