@@ -5,7 +5,7 @@ import type { Account } from "../../../types/Account.js";
 const GET_URL = "http://localhost:8080/api/income/all";
 const ACCOUNT_URL = "http://localhost:8080/api/accounts/all";
 
-export async function generateIncomeTable() {
+export async function generateIncomeTable(onDataChanged?: (updatedData: Income[]) => void) {
 
     var table = document.createElement("table");
 
@@ -79,7 +79,8 @@ export async function generateIncomeTable() {
                     },
                     getValue: (select) => parseInt((select as HTMLSelectElement).value)
                 }
-            ]
+            ],
+            onDataChanged
         
        });
     } catch (error) {

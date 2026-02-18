@@ -3,7 +3,7 @@ import { createEntityTable } from "../EntityTable.js";
 
 const GET_URL = "http://localhost:8080/api/allocations/all";
 
-export async function generateAllocationTable() {
+export async function generateAllocationTable(onDataChanged?: (updatedData: Allocation[]) => void) {
 
     var table = document.createElement("table");
 
@@ -55,7 +55,8 @@ export async function generateAllocationTable() {
                     },
                     getValue: (i) => (i as HTMLInputElement).value
                 }
-            ]
+            ],
+            onDataChanged
         });
     } catch (error) {
         console.error("Error fetching allocations:", error);
