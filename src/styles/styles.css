@@ -35,7 +35,7 @@ th, td {
     flex-direction: column;
 }
 
-.account-table {
+.tables-container-right table {
     margin-bottom: 20px;
 }
 
