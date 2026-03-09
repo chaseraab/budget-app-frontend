@@ -48,13 +48,13 @@ export async function generateIncomeTable(onDataChanged?: (updatedData: Income[]
                     getValue: (i) => parseFloat((i as HTMLInputElement).value)
                 },
                 {
-                    header: "Recurring",
-                    field: "isRecurring",
+                    header: "Active",
+                    field: "isActive",
                     input: (value) => {
                         const i = document.createElement("input");
                         i.type = "checkbox";
                         i.checked = value;
-                        i.name = "isRecurring";
+                        i.name = "isActive";
                         return i;
                     },
                     getValue: (i) => (i as HTMLInputElement).checked
