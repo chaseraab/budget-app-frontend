@@ -10,14 +10,11 @@ type TableConfig<T> = {
     baseURL: string;
     entityName: string;
     columns: ColumnConfig<T>[];
-    onDataChanged?: ((data: T[]) => void) | undefined; // callback for when data changes
 };
 
 
 
 export function createEntityTable<T extends { id: number }>(data: T[], config: TableConfig<T>): HTMLTableElement {
-
-    let internalData = [...data]; // maintain internal state of data
 
     function enableClickOff(element: HTMLElement, callback: () => void) {
         function handler(event: MouseEvent) {
@@ -79,11 +76,6 @@ export function createEntityTable<T extends { id: number }>(data: T[], config: T
             if (res.ok) {
                 const newData = await res.json();
                 row.replaceWith(createDisplayRow(newData));
-                const index = internalData.findIndex(i => i.id === item.id);
-                if (index !== -1) {
-                    internalData[index] = newData;
-                }
-                config.onDataChanged?.(internalData);
             } else {
                 alert("Failed to update. Please try again.");
             }
@@ -120,11 +112,7 @@ export function createEntityTable<T extends { id: number }>(data: T[], config: T
                     `${config.baseURL}/delete/${item.id}`,
                     { method: "DELETE" }
                 );
-                if (res.ok) {
-                    row.remove();
-                    internalData = internalData.filter(i => i.id !== item.id);
-                    config.onDataChanged?.(internalData);
-                }
+                if (res.ok) row.remove();
             }
         });
 
@@ -174,8 +162,6 @@ export function createEntityTable<T extends { id: number }>(data: T[], config: T
                 const createdItem = await res.json();
                 row.replaceWith(createDisplayRow(createdItem));
                 table.appendChild(createEntryRow());
-                internalData.push(createdItem);
-                config.onDataChanged?.(internalData);
             } else {
                 alert("Failed to create. Please try again.");
             }
@@ -193,6 +179,5 @@ export function createEntityTable<T extends { id: number }>(data: T[], config: T
         table.appendChild(row);
     });
     table.appendChild(createEntryRow());
-    config.onDataChanged?.(internalData); // initial callback with loaded data
     return table;
 }
