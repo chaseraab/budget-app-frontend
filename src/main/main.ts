@@ -2,29 +2,12 @@
 // import { renderIncomePage } from "@pages/Income.js";
 // import { renderAllocationsPage } from "@pages/Allocation.js";
 import { renderPlanningPage } from "@pages/Planning.js";
+import { renderBudgetsPage } from "@pages/Budgets.js";
 
 const root = document.getElementById("root")!;
 
 function renderHomePage() {
     root.innerHTML = "";
-
-    // const accountButton = document.createElement("button");
-    // accountButton.textContent = "Accounts";
-    // accountButton.addEventListener("click", () => {
-    //     renderAccountsPage(root);
-    // });
-
-    // const incomeButton = document.createElement("button");
-    // incomeButton.textContent = "Income";
-    // incomeButton.addEventListener("click", () => {
-    //     renderIncomePage(root)
-    // });
-
-    // const allocationButton = document.createElement("button");
-    // allocationButton.textContent = "Allocations";
-    // allocationButton.addEventListener("click", () => {
-    //     renderAllocationsPage(root);
-    // });
 
     const planningButton = document.createElement("button");
     planningButton.textContent = "Planning";
@@ -32,10 +15,14 @@ function renderHomePage() {
         renderPlanningPage(root);
     });
 
-    // root?.appendChild(accountButton);
-    // root?.appendChild(incomeButton);
-    // root?.appendChild(allocationButton);
+    const budgetsButton = document.createElement("button");
+    budgetsButton.textContent = "Budgets";
+    budgetsButton.addEventListener("click", () => {
+        renderBudgetsPage(root);
+    });
+    
     root?.appendChild(planningButton);
+    root?.appendChild(budgetsButton);
 }
 
 renderHomePage();
